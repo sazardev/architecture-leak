@@ -1,0 +1,136 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────
+  # Build the Rust engine for every platform target, then package platform-
+  # specific VSIXs and attach them to the GitHub release.
+  # ─────────────────────────────────────────────────────────────────────────
+  build:
+    name: ${{ matrix.target.vsce }}
+    runs-on: ${{ matrix.target.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - vsce:       win32-x64
+            os:         windows-latest
+            rust_triple: x86_64-pc-windows-msvc
+            binary_out:  architecture-leak-x86_64-windows.exe
+
+          - vsce:       linux-x64
+            os:         ubuntu-22.04
+            rust_triple: x86_64-unknown-linux-gnu
+            binary_out:  architecture-leak-x86_64-linux
+
+          - vsce:       darwin-x64
+            os:         macos-13
+            rust_triple: x86_64-apple-darwin
+            binary_out:  architecture-leak-x86_64-macos
+
+          - vsce:       darwin-arm64
+            os:         macos-14
+            rust_triple: aarch64-apple-darwin
+            binary_out:  architecture-leak-aarch64-macos
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── Rust ──────────────────────────────────────────────────────────────
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target.rust_triple }}
+
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: engine
+
+      - name: Build engine (release)
+        working-directory: engine
+        run: cargo build --release --target ${{ matrix.target.rust_triple }}
+
+      - name: Stage binary
+        shell: bash
+        run: |
+          mkdir -p bin
+          SRC="engine/target/${{ matrix.target.rust_triple }}/release/architecture-leak"
+          # Windows binary has .exe suffix
+          if [[ "${{ matrix.target.os }}" == "windows-latest" ]]; then
+            SRC="${SRC}.exe"
+          fi
+          cp "$SRC" "bin/${{ matrix.target.binary_out }}"
+          chmod +x "bin/${{ matrix.target.binary_out }}" || true
+
+      # ── Node / Extension ──────────────────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Package VSIX
+        run: npx vsce package --target ${{ matrix.target.vsce }} --no-dependencies
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vsix-${{ matrix.target.vsce }}
+          path: '*.vsix'
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # After all builds succeed: create GitHub release and publish to marketplace
+  # ─────────────────────────────────────────────────────────────────────────
+  release:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-22.04
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Download all VSIX artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: vsix-*
+          merge-multiple: true
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.vsix
+          generate_release_notes: true
+
+      - name: Publish to VS Code Marketplace
+        run: |
+          for vsix in dist/*.vsix; do
+            npx vsce publish --packagePath "$vsix"
+          done
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}

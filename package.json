@@ -1,23 +1,116 @@
 {
   "name": "architecture-leak",
   "displayName": "Architecture Leak",
-  "description": "Linter de Arquitectura Hexagonal de alto rendimiento.",
-  "version": "0.0.1",
+  "description": "High-performance architectural boundary enforcer for Hexagonal & Clean Architecture. Powered by Rust.",
+  "version": "0.1.0",
+  "publisher": "architecture-leak",
   "engines": {
-    "vscode": "^1.115.0"
+    "vscode": "^1.90.0"
   },
   "categories": [
+    "Linters",
     "Other"
   ],
-  "activationEvents": [],
+  "keywords": [
+    "architecture",
+    "hexagonal",
+    "clean architecture",
+    "linter",
+    "dependency rule",
+    "rust",
+    "LSP"
+  ],
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1d2021",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:go",
+    "workspaceContains:.architecture-leak.json"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "architecture-leak.helloWorld",
-        "title": "Hello World"
+        "command": "architecture-leak.createConfig",
+        "title": "Architecture Leak: Create Config (Wizard)",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "architecture-leak.createConfigQuick",
+        "title": "Architecture Leak: Create Config (Quick Pick)",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "architecture-leak.showWelcome",
+        "title": "Architecture Leak: Show Welcome",
+        "icon": "$(home)"
+      },
+      {
+        "command": "architecture-leak.showViolationsReport",
+        "title": "Architecture Leak: Show Violations Report",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "architecture-leak.reloadConfig",
+        "title": "Architecture Leak: Reload Config",
+        "icon": "$(refresh)"
       }
-    ]
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": ".architecture-leak.json",
+        "url": "./schemas/architecture-leak.schema.json"
+      }
+    ],
+    "configuration": {
+      "title": "Architecture Leak",
+      "properties": {
+        "architectureLeak.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the Architecture Leak analysis engine."
+        },
+        "architectureLeak.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Override path to the architecture-leak LSP binary. Leave empty to use the bundled binary."
+        },
+        "architectureLeak.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Trace LSP server communication for debugging."
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "architecture-leak.createConfig",
+          "when": "explorerResourceIsFolder",
+          "group": "2_workspace@99"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "architecture-leak.showViolationsReport"
+        },
+        {
+          "command": "architecture-leak.reloadConfig",
+          "when": "workspaceContains:.architecture-leak.json"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -31,18 +124,28 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "build:engine": "cargo build --release --manifest-path engine/Cargo.toml",
+    "package:win32-x64": "vsce package --target win32-x64",
+    "package:linux-x64": "vsce package --target linux-x64",
+    "package:darwin-x64": "vsce package --target darwin-x64",
+    "package:darwin-arm64": "vsce package --target darwin-arm64"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
   },
   "devDependencies": {
-    "@types/vscode": "^1.115.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
-    "typescript-eslint": "^8.56.1",
-    "eslint": "^9.39.3",
+    "@types/vscode": "^1.90.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.0.0",
     "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "typescript-eslint": "^8.56.1"
   }
 }

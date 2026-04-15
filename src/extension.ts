@@ -1,26 +1,65 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { startClient, stopClient } from './client';
+import { StatusBarController } from './statusBar';
+import { WelcomePanel } from './welcomePanel';
+import { createConfigWizard, createConfigQuick } from './configCreator';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+const statusBar = new StatusBarController();
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "architecture-leak" is now active!');
+export async function activate(context: vscode.ExtensionContext): Promise<void> {
+    // Status bar — always visible once activated
+    statusBar.init(context);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('architecture-leak.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Architecture Leak!');
-	});
+    // Show welcome panel on first ever launch
+    const welcomed = context.globalState.get<boolean>('architectureLeak.welcomed', false);
+    if (!welcomed) {
+        await context.globalState.update('architectureLeak.welcomed', true);
+        WelcomePanel.createOrShow(context);
+    }
 
-	context.subscriptions.push(disposable);
+    // Register all commands
+    context.subscriptions.push(
+        vscode.commands.registerCommand('architecture-leak.createConfig', () =>
+            createConfigWizard(context),
+        ),
+        vscode.commands.registerCommand('architecture-leak.createConfigQuick', () =>
+            createConfigQuick(context),
+        ),
+        vscode.commands.registerCommand('architecture-leak.showWelcome', () =>
+            WelcomePanel.createOrShow(context),
+        ),
+        vscode.commands.registerCommand('architecture-leak.showViolationsReport', () =>
+            vscode.commands.executeCommand('workbench.actions.view.problems'),
+        ),
+        vscode.commands.registerCommand('architecture-leak.reloadConfig', async () => {
+            statusBar.setLoading();
+            await stopClient();
+            const client = await startClient(context);
+            if (client) {
+                statusBar.setOk(0);
+                vscode.window.showInformationMessage('Architecture Leak: config reloaded.');
+            } else {
+                statusBar.setDisabled();
+            }
+        }),
+    );
+
+    // Start the Rust LSP engine
+    statusBar.setLoading();
+    const client = await startClient(context);
+    if (client) {
+        statusBar.setOk(0);
+    } else {
+        const cfg = vscode.workspace.getConfiguration('architectureLeak');
+        if (!cfg.get<boolean>('enable', true)) {
+            statusBar.setDisabled();
+        } else {
+            statusBar.setError('binary not found — see output panel');
+        }
+    }
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+export async function deactivate(): Promise<void> {
+    await stopClient();
+    statusBar.dispose();
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "architecture-leak-config",
+  "title": "Architecture Leak Configuration",
+  "description": "Configuration file for architecture-leak: defines tier boundaries and enforcement options.",
+  "type": "object",
+  "required": ["boundaries"],
+  "additionalProperties": false,
+  "properties": {
+    "boundaries": {
+      "type": "object",
+      "description": "Directory patterns that define each architectural tier.",
+      "required": ["tier0", "tier1", "tier2"],
+      "additionalProperties": false,
+      "properties": {
+        "tier0": {
+          "type": "array",
+          "description": "Tier 0 — Domain. The core business logic. Cannot import from any other tier.",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "examples": [["src/domain", "pkg/entities"]]
+        },
+        "tier1": {
+          "type": "array",
+          "description": "Tier 1 — Application. Use cases & orchestration. Can only import from Tier 0.",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "examples": [["src/application", "pkg/usecases"]]
+        },
+        "tier2": {
+          "type": "array",
+          "description": "Tier 2 — Infrastructure. External adapters. May import from Tier 0 and Tier 1.",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "examples": [["src/infrastructure", "pkg/adapters"]]
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "description": "Optional enforcement settings.",
+      "additionalProperties": false,
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": ["error", "warning"],
+          "default": "error",
+          "description": "Diagnostic severity for boundary violations."
+        },
+        "exclude": {
+          "type": "array",
+          "description": "Glob patterns for files to exclude from analysis.",
+          "items": { "type": "string" },
+          "default": [],
+          "examples": [["**/*_test.go", "**/vendor/**", "**/*.spec.ts"]]
+        }
+      }
+    }
+  }
+}

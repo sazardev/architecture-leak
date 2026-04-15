@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Gruvbox dark hard background -->
+  <rect width="128" height="128" rx="22" fill="#1d2021"/>
+
+  <!-- Outer hexagon ring (gruvbox orange) - pointy-top -->
+  <polygon
+    points="64,6 111,33 111,87 64,114 17,87 17,33"
+    fill="none"
+    stroke="#fe8019"
+    stroke-width="4.5"
+    stroke-linejoin="round"
+  />
+
+  <!-- Inner hexagon fill (slightly lighter bg) -->
+  <polygon
+    points="64,18 102,40 102,84 64,106 26,84 26,40"
+    fill="#282828"
+  />
+
+  <!-- Water drop body (gruvbox yellow) -->
+  <path
+    d="M64,30 C64,30 44,60 44,76 C44,87.05 53.0,96 64,96 C75.0,96 84,87.05 84,76 C84,60 64,30 64,30 Z"
+    fill="#fabd2f"
+  />
+
+  <!-- Hollow circle inside drop (leak hole) — dark -->
+  <circle cx="64" cy="77" r="10" fill="#282828"/>
+
+  <!-- Slash through the drop → "leak zeroed / Null" glyph (gruvbox orange line) -->
+  <line x1="54" y1="87" x2="74" y2="67" stroke="#fe8019" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Three drip dots below hexagon (orange) -->
+  <circle cx="56" cy="112" r="2.2" fill="#fe8019" opacity="0.6"/>
+  <circle cx="64" cy="117" r="3"   fill="#fe8019" opacity="0.9"/>
+  <circle cx="72" cy="112" r="2.2" fill="#fe8019" opacity="0.6"/>
+</svg>
