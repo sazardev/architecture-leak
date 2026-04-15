@@ -3,6 +3,12 @@
 out/**
 node_modules/**
 src/**
+engine/src/**
+engine/.cargo/**
+engine/target/**
+engine/Cargo.toml
+engine/Cargo.lock
+.github/**
 .gitignore
 .yarnrc
 esbuild.js

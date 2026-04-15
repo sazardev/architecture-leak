@@ -1,1 +1,151 @@
-ewogICJuYW1lIjogImFyY2hpdGVjdHVyZS1sZWFrIiwKICAiZGlzcGxheU5hbWUiOiAiQXJjaGl0ZWN0dXJlIExlYWsiLAogICJkZXNjcmlwdGlvbiI6ICJIaWdoLXBlcmZvcm1hbmNlIGFyY2hpdGVjdHVyYWwgYm91bmRhcnkgZW5mb3JjZXIgZm9yIEhleGFnb25hbCAmIENsZWFuIEFyY2hpdGVjdHVyZS4gUG93ZXJlZCBieSBSdXN0LiIsCiAgInZlcnNpb24iOiAiMC4xLjAiLAogICJwdWJsaXNoZXIiOiAic2F6YXJkZXYiLAogICJlbmdpbmVzIjogewogICAgInZzY29kZSI6ICJeMS45MC4wIgogIH0sCiAgImNhdGVnb3JpZXMiOiBbCiAgICAiTGludGVycyIsCiAgICAiT3RoZXIiCiAgXSwKICAia2V5d29yZHMiOiBbCiAgICAiYXJjaGl0ZWN0dXJlIiwKICAgICJoZXhhZ29uYWwiLAogICAgImNsZWFuIGFyY2hpdGVjdHVyZSIsCiAgICAibGludGVyIiwKICAgICJkZXBlbmRlbmN5IHJ1bGUiLAogICAgInJ1c3QiLAogICAgIkxTUCIKICBdLAogICJpY29uIjogImFzc2V0cy9pY29uLnBuZyIsCiAgImdhbGxlcnlCYW5uZXIiOiB7CiAgICAiY29sb3IiOiAiIzFkMjAyMSIsCiAgICAidGhlbWUiOiAiZGFyayIKICB9LAogICJhY3RpdmF0aW9uRXZlbnRzIjogWwogICAgIm9uTGFuZ3VhZ2U6dHlwZXNjcmlwdCIsCiAgICAib25MYW5ndWFnZTp0eXBlc2NyaXB0cmVhY3QiLAogICAgIm9uTGFuZ3VhZ2U6amF2YXNjcmlwdCIsCiAgICAib25MYW5ndWFnZTpqYXZhc2NyaXB0cmVhY3QiLAogICAgIm9uTGFuZ3VhZ2U6Z28iLAogICAgIndvcmtzcGFjZUNvbnRhaW5zOi5hcmNoaXRlY3R1cmUtbGVhay5qc29uIgogIF0sCiAgIm1haW4iOiAiLi9kaXN0L2V4dGVuc2lvbi5qcyIsCiAgImNvbnRyaWJ1dGVzIjogewogICAgImNvbW1hbmRzIjogWwogICAgICB7CiAgICAgICAgImNvbW1hbmQiOiAiYXJjaGl0ZWN0dXJlLWxlYWsuY3JlYXRlQ29uZmlnIiwKICAgICAgICAidGl0bGUiOiAiQXJjaGl0ZWN0dXJlIExlYWs6IENyZWF0ZSBDb25maWcgKFdpemFyZCkiLAogICAgICAgICJpY29uIjogIiQoZ2VhcikiCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiY29tbWFuZCI6ICJhcmNoaXRlY3R1cmUtbGVhay5jcmVhdGVDb25maWdRdWljayIsCiAgICAgICAgInRpdGxlIjogIkFyY2hpdGVjdHVyZSBMZWFrOiBDcmVhdGUgQ29uZmlnIChRdWljayBQaWNrKSIsCiAgICAgICAgImljb24iOiAiJCh6YXApIgogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbW1hbmQiOiAiYXJjaGl0ZWN0dXJlLWxlYWsuc2hvd1dlbGNvbWUiLAogICAgICAgICJ0aXRsZSI6ICJBcmNoaXRlY3R1cmUgTGVhazogU2hvdyBXZWxjb21lIiwKICAgICAgICAiaWNvbiI6ICIkKGhvbWUpIgogICAgICB9LAogICAgICB7CiAgICAgICAgImNvbW1hbmQiOiAiYXJjaGl0ZWN0dXJlLWxlYWsuc2hvd1Zpb2xhdGlvbnNSZXBvcnQiLAogICAgICAgICJ0aXRsZSI6ICJBcmNoaXRlY3R1cmUgTGVhazogU2hvdyBWaW9sYXRpb25zIFJlcG9ydCIsCiAgICAgICAgImljb24iOiAiJCh3YXJuaW5nKSIKICAgICAgfSwKICAgICAgewogICAgICAgICJjb21tYW5kIjogImFyY2hpdGVjdHVyZS1sZWFrLnJlbG9hZENvbmZpZyIsCiAgICAgICAgInRpdGxlIjogIkFyY2hpdGVjdHVyZSBMZWFrOiBSZWxvYWQgQ29uZmlnIiwKICAgICAgICAiaWNvbiI6ICIkKHJlZnJlc2gpIgogICAgICB9CiAgICBdLAogICAgImpzb25WYWxpZGF0aW9uIjogWwogICAgICB7CiAgICAgICAgImZpbGVNYXRjaCI6ICIuYXJjaGl0ZWN0dXJlLWxlYWsuanNvbiIsCiAgICAgICAgInVybCI6ICIuL3NjaGVtYXMvYXJjaGl0ZWN0dXJlLWxlYWsuc2NoZW1hLmpzb24iCiAgICAgIH0KICAgIF0sCiAgICAiY29uZmlndXJhdGlvbiI6IHsKICAgICAgInRpdGxlIjogIkFyY2hpdGVjdHVyZSBMZWFrIiwKICAgICAgInByb3BlcnRpZXMiOiB7CiAgICAgICAgImFyY2hpdGVjdHVyZUxlYWsuZW5hYmxlIjogewogICAgICAgICAgInR5cGUiOiAiYm9vbGVhbiIsCiAgICAgICAgICAiZGVmYXVsdCI6IHRydWUsCiAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiRW5hYmxlIG9yIGRpc2FibGUgdGhlIEFyY2hpdGVjdHVyZSBMZWFrIGFuYWx5c2lzIGVuZ2luZS4iCiAgICAgICAgfSwKICAgICAgICAiYXJjaGl0ZWN0dXJlTGVhay5zZXJ2ZXJQYXRoIjogewogICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwKICAgICAgICAgICJkZWZhdWx0IjogIiIsCiAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiT3ZlcnJpZGUgcGF0aCB0byB0aGUgYXJjaGl0ZWN0dXJlLWxlYWsgTFNQIGJpbmFyeS4gTGVhdmUgZW1wdHkgdG8gdXNlIHRoZSBidW5kbGVkIGJpbmFyeS4iCiAgICAgICAgfSwKICAgICAgICAiYXJjaGl0ZWN0dXJlTGVhay50cmFjZS5zZXJ2ZXIiOiB7CiAgICAgICAgICAidHlwZSI6ICJzdHJpbmciLAogICAgICAgICAgImVudW0iOiBbCiAgICAgICAgICAgICJvZmYiLAogICAgICAgICAgICAibWVzc2FnZXMiLAogICAgICAgICAgICAidmVyYm9zZSIKICAgICAgICAgIF0sCiAgICAgICAgICAiZGVmYXVsdCI6ICJvZmYiLAogICAgICAgICAgImRlc2NyaXB0aW9uIjogIlRyYWNlIExTUCBzZXJ2ZXIgY29tbXVuaWNhdGlvbiBmb3IgZGVidWdnaW5nLiIKICAgICAgICB9CiAgICAgIH0KICAgIH0sCiAgICAibWVudXMiOiB7CiAgICAgICJleHBsb3Jlci9jb250ZXh0IjogWwogICAgICAgIHsKICAgICAgICAgICJjb21tYW5kIjogImFyY2hpdGVjdHVyZS1sZWFrLmNyZWF0ZUNvbmZpZyIsCiAgICAgICAgICAid2hlbiI6ICJleHBsb3JlclJlc291cmNlSXNGb2xkZXIiLAogICAgICAgICAgImdyb3VwIjogIjJfd29ya3NwYWNlQDk5IgogICAgICAgIH0KICAgICAgXSwKICAgICAgImNvbW1hbmRQYWxldHRlIjogWwogICAgICAgIHsKICAgICAgICAgICJjb21tYW5kIjogImFyY2hpdGVjdHVyZS1sZWFrLnNob3dWaW9sYXRpb25zUmVwb3J0IgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgImNvbW1hbmQiOiAiYXJjaGl0ZWN0dXJlLWxlYWsucmVsb2FkQ29uZmlnIiwKICAgICAgICAgICJ3aGVuIjogIndvcmtzcGFjZUNvbnRhaW5zOi5hcmNoaXRlY3R1cmUtbGVhay5qc29uIgogICAgICAgIH0KICAgICAgXQogICAgfQogIH0sCiAgInNjcmlwdHMiOiB7CiAgICAidnNjb2RlOnByZXB1Ymxpc2giOiAibnBtIHJ1biBwYWNrYWdlIiwKICAgICJjb21waWxlIjogIm5wbSBydW4gY2hlY2stdHlwZXMgJiYgbnBtIHJ1biBsaW50ICYmIG5vZGUgZXNidWlsZC5qcyIsCiAgICAid2F0Y2giOiAibnBtLXJ1bi1hbGwgLXAgd2F0Y2g6KiIsCiAgICAid2F0Y2g6ZXNidWlsZCI6ICJub2RlIGVzYnVpbGQuanMgLS13YXRjaCIsCiAgICAid2F0Y2g6dHNjIjogInRzYyAtLW5vRW1pdCAtLXdhdGNoIC0tcHJvamVjdCB0c2NvbmZpZy5qc29uIiwKICAgICJwYWNrYWdlIjogIm5wbSBydW4gY2hlY2stdHlwZXMgJiYgbnBtIHJ1biBsaW50ICYmIG5vZGUgZXNidWlsZC5qcyAtLXByb2R1Y3Rpb24iLAogICAgImNvbXBpbGUtdGVzdHMiOiAidHNjIC1wIC4gLS1vdXREpciBvdXQiLAogICAgIndhdGNoLXRlc3RzIjogInRzYyAtcCAuIC13IC0tb3V0RGlyIG91dCIsCiAgICAicHJldGVzdCI6ICJucG0gcnVuIGNvbXBpbGUtdGVzdHMgJiYgbnBtIHJ1biBjb21waWxlICYmIG5wbSBydW4gbGludCIsCiAgICAiY2hlY2stdHlwZXMiOiAidHNjIC0tbm9FbWl0IiwKICAgICJsaW50IjogImVzbGludCBzcmMiLAogICAgInRlc3QiOiAidnNjb2RlLXRlc3QiLAogICAgImJ1aWxkOmVuZ2luZSI6ICJjYXJnbyBidWlsZCAtLXJlbGVhc2UgLS1tYW5pZmVzdC1wYXRoIGVuZ2luZS9DYXJnby50b21sIiwKICAgICJwYWNrYWdlOndpbjMyLXg2NCI6ICJ2c2NlIHBhY2thZ2UgLS10YXJnZXQgd2luMzIteDY0IiwKICAgICJwYWNrYWdlOmxpbnV4LXg2NCI6ICJ2c2NlIHBhY2thZ2UgLS10YXJnZXQgbGludXgteDY0IiwKICAgICJwYWNrYWdlOmRhcndpbi14NjQiOiAidnNjZSBwYWNrYWdlIC0tdGFyZ2V0IGRhcndpbi14NjQiLAogICAgInBhY2thZ2U6ZGFyd2luLWFybTY0IjogInZzY2UgcGFja2FnZSAtLXRhcmdldCBkYXJ3aW4tYXJtNjQiCiAgfSwKICAiZGVwZW5kZW5jaWVzIjogewogICAgInZzY29kZS1sYW5ndWFnZWNsaWVudCI6ICJeOS4wLjEiCiAgfSwKICAiZGV2RGVwZW5kZW5jaWVzIjogewogICAgIkByZXN2Zy9yZXN2Zy1qcyI6ICJeMi42LjIiLAogICAgIkB0eXBlcy9tb2NoYSI6ICJeMTAuMC4xMCIsCiAgICAiQHR5cGVzL25vZGUiOiAiMjIueCIsCiAgICAiQHR5cGVzL3ZzY29kZSI6ICJeMS45MC4wIiwKICAgICJAdnNjb2RlL3Rlc3QtY2xpIjogIl4wLjAuMTIiLAogICAgIkB2c2NvZGUvdGVzdC1lbGVjdHJvbiI6ICJeMi41LjIiLAogICAgIkB2c2NvZGUvdnNjZSI6ICJeMy4wLjAiLAogICAgImVzYnVpbGQiOiAiXjAuMjcuMyIsCiAgICAiZXNsaW50IjogIl45LjM5LjMiLAogICAgIm5wbS1ydW4tYWxsIjogIl40LjEuNSIsCiAgICAidHlwZXNjcmlwdCI6ICJeNS45LjMiLAogICAgInR5cGVzY3JpcHQtZXNsaW50IjogIl44LjU2LjEiCiAgfQp9Cg==
+{
+  "name": "architecture-leak",
+  "displayName": "Architecture Leak",
+  "description": "High-performance architectural boundary enforcer for Hexagonal & Clean Architecture. Powered by Rust.",
+  "version": "0.1.0",
+  "publisher": "sazarcode",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "architecture",
+    "hexagonal",
+    "clean architecture",
+    "linter",
+    "dependency rule",
+    "rust",
+    "LSP"
+  ],
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1d2021",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:go",
+    "workspaceContains:.architecture-leak.json"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "architecture-leak.createConfig",
+        "title": "Architecture Leak: Create Config (Wizard)",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "architecture-leak.createConfigQuick",
+        "title": "Architecture Leak: Create Config (Quick Pick)",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "architecture-leak.showWelcome",
+        "title": "Architecture Leak: Show Welcome",
+        "icon": "$(home)"
+      },
+      {
+        "command": "architecture-leak.showViolationsReport",
+        "title": "Architecture Leak: Show Violations Report",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "architecture-leak.reloadConfig",
+        "title": "Architecture Leak: Reload Config",
+        "icon": "$(refresh)"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": ".architecture-leak.json",
+        "url": "./schemas/architecture-leak.schema.json"
+      }
+    ],
+    "configuration": {
+      "title": "Architecture Leak",
+      "properties": {
+        "architectureLeak.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the Architecture Leak analysis engine."
+        },
+        "architectureLeak.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Override path to the architecture-leak LSP binary. Leave empty to use the bundled binary."
+        },
+        "architectureLeak.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Trace LSP server communication for debugging."
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "architecture-leak.createConfig",
+          "when": "explorerResourceIsFolder",
+          "group": "2_workspace@99"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "architecture-leak.showViolationsReport"
+        },
+        {
+          "command": "architecture-leak.reloadConfig",
+          "when": "workspaceContains:.architecture-leak.json"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "build:engine": "cargo build --release --manifest-path engine/Cargo.toml",
+    "package:win32-x64": "vsce package --target win32-x64",
+    "package:linux-x64": "vsce package --target linux-x64",
+    "package:darwin-x64": "vsce package --target darwin-x64",
+    "package:darwin-arm64": "vsce package --target darwin-arm64"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.90.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  }
+}
