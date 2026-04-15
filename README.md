@@ -1,71 +1,64 @@
-# architecture-leak README
+# architecture-leak
 
-This is the README for your extension "architecture-leak". After writing up a brief description, we recommend including the following sections.
+Static analysis engine for architectural boundary enforcement in Hexagonal and Clean Architecture systems.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+## Overview
+**architecture-leak** is a high-performance VS Code extension designed to maintain strict isolation between architectural layers. By utilizing a native static analysis engine written in Rust, the tool detects and prevents illegal dependency injections in real-time, ensuring that domain logic remains untainted by infrastructure concerns.
 
 ---
 
-## Following extension guidelines
+## Architectural Philosophy
+In complex software systems, architectural erosion occurs when low-level implementation details leak into higher-level business logic. **architecture-leak** automates the enforcement of the Dependency Rule: dependencies must only point inwards. 
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+The engine monitors the project structure to ensure that:
+1. **Domain** remains completely isolated from external frameworks and drivers.
+2. **Application** logic only interacts with the Domain and its own interfaces.
+3. **Infrastructure** serves as the outer shell, implementing the technical details required by the inner layers.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+---
 
-## Working with Markdown
+## Technical Specifications
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+| Component | Technology | Implementation |
+| :--- | :--- | :--- |
+| **Analysis Engine** | **Rust** | Native performance with zero-cost abstractions and minimal memory footprint. |
+| **Protocol** | **LSP** | Language Server Protocol for asynchronous, non-blocking editor communication. |
+| **Client Interface** | **TypeScript** | Lightweight VS Code integration layer. |
+| **Build System** | **esbuild** | Optimized bundling for rapid extension activation. |
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+---
 
-## For more information
+## Layer Enforcement Model
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+The engine classifies the project into three distinct tiers of visibility:
 
-**Enjoy!**
+* **Tier 0: Domain**
+    * The core business logic. 
+    * **Restriction:** Cannot import from any other tier.
+* **Tier 1: Application**
+    * Use cases and orchestration.
+    * **Restriction:** Can only import from Tier 0.
+* **Tier 2: Infrastructure**
+    * External adapters (DB, API, CLI, Cloud).
+    * **Permitted:** Can import from Tier 0 and Tier 1.
+
+Any violation of this hierarchy is flagged immediately within the editor as a critical architectural error.
+
+---
+
+## Configuration
+
+Standard directory patterns (`internal/domain`, `internal/app`, `internal/infra`) are detected automatically. Custom boundaries can be defined via a `.architecture-leak.json` file in the project root:
+
+```json
+{
+  "boundaries": {
+    "tier0": ["src/domain", "pkg/entities"],
+    "tier1": ["src/usecases", "pkg/services"],
+    "tier2": ["src/infrastructure", "pkg/adapters"]
+  },
+  "options": {
+    "severity": "error",
+    "exclude": ["**/*_test.go", "**/vendor/**"]
+  }
+}
