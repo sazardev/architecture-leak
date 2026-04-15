@@ -136,23 +136,34 @@ impl LanguageServer for Backend {
 
 impl Backend {
     async fn analyze_and_publish(&self, uri: &Url, source: &str) {
-        let state = self.state.lock().await;
-
-        let (root, cfg) = match (&state.workspace_root, &state.config) {
-            (Some(r), Some(c)) => (r.clone(), c.clone()),
-            _ => {
-                // No config — clear any previous diagnostics silently
-                self.client
-                    .publish_diagnostics(uri.clone(), vec![], None)
-                    .await;
-                return;
-            }
-        };
-        drop(state); // release lock before async work
-
         let file_path = match uri.to_file_path() {
             Ok(p) => p,
             Err(_) => return,
+        };
+
+        // Resolve workspace root + config:
+        // 1. Try the workspace-level config (set at initialize time).
+        // 2. If not available, walk up from the opened file's directory.
+        //    This handles cases where VS Code's workspace root differs from
+        //    the project root that contains .architecture-leak.json.
+        let state = self.state.lock().await;
+        let ws_root = state.workspace_root.clone();
+        let ws_cfg = state.config.clone();
+        drop(state);
+
+        let (root, cfg) = if let (Some(r), Some(c)) = (ws_root, ws_cfg) {
+            (r, c)
+        } else {
+            let file_dir = file_path.parent().unwrap_or(&file_path);
+            match config::find_and_load_with_root(file_dir) {
+                Some(pair) => pair,
+                None => {
+                    self.client
+                        .publish_diagnostics(uri.clone(), vec![], None)
+                        .await;
+                    return;
+                }
+            }
         };
 
         let violations = analyzer::check_file(&file_path, &root, source, &cfg);

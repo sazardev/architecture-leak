@@ -1,0 +1,11 @@
+{
+  "boundaries": {
+    "tier0": ["internal/domain"],
+    "tier1": ["internal/application"],
+    "tier2": ["internal/infrastructure"]
+  },
+  "options": {
+    "severity": "error",
+    "exclude": []
+  }
+}

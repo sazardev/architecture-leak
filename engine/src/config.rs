@@ -76,6 +76,24 @@ pub fn load(workspace_root: &Path) -> Option<ArchConfig> {
     }
 }
 
+/// Walk up from `start` looking for `.architecture-leak.json`.
+/// Returns `(config_dir, config)` so the caller knows the effective workspace root.
+pub fn find_and_load_with_root(start: &Path) -> Option<(std::path::PathBuf, ArchConfig)> {
+    let mut current = start.to_path_buf();
+    loop {
+        let candidate = current.join(".architecture-leak.json");
+        if candidate.exists() {
+            if let Some(cfg) = load_file(&candidate) {
+                return Some((current, cfg));
+            }
+        }
+        if !current.pop() {
+            break;
+        }
+    }
+    None
+}
+
 fn load_file(path: &Path) -> Option<ArchConfig> {
     let content = std::fs::read_to_string(path).ok()?;
     serde_json::from_str::<ArchConfig>(&content).ok()

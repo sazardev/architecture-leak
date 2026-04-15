@@ -16,6 +16,11 @@ static RE_BLOCK_LINE: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r#"^\s*(?:\w+\s+)?"([^"]+)""#).unwrap()
 });
 
+// Closing paren of an import block on its own line
+static RE_BLOCK_CLOSE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(?m)^\s*\)").unwrap()
+});
+
 /// Returns a list of (line_number_0based, import_path) for every Go import
 /// found in `source`.
 pub fn extract_imports(source: &str) -> Vec<(u32, String)> {
@@ -35,8 +40,10 @@ pub fn extract_imports(source: &str) -> Vec<(u32, String)> {
         let abs_open = search_start + open_m.end();
         let block_start_line = line_of(source, abs_open);
 
-        // Find matching `)`
-        if let Some(rel_close) = source[abs_open..].find(')') {
+        // Find the closing `)` on its own line (avoids matching `)` inside comments).
+        let rest = &source[abs_open..];
+        if let Some(close_m) = RE_BLOCK_CLOSE.find(rest) {
+            let rel_close = close_m.start();
             let block_text = &source[abs_open..abs_open + rel_close];
             for (i, line) in block_text.lines().enumerate() {
                 if let Some(cap) = RE_BLOCK_LINE.captures(line) {
