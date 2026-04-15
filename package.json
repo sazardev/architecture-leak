@@ -2,7 +2,7 @@
   "name": "architecture-leak",
   "displayName": "Architecture Leak",
   "description": "High-performance architectural boundary enforcer for Hexagonal & Clean Architecture. Powered by Rust.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "sazarcode",
   "engines": {
     "vscode": "^1.90.0"
